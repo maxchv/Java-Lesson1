@@ -1,6 +1,9 @@
 package ua.step.practice;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 /**
  * Задание: Написать программу, которая проверяет, все ли значения
@@ -19,5 +22,7 @@ public class Task03 {
         for (int i = 0; i < arr.length; i++) {
             arr[i] = scanner.nextInt();
         }
+        System.out.println(Arrays.stream(arr).filter(el -> el == arr[0]).count() != arr.length ? "No" : "Yes" );
+
     }
 }

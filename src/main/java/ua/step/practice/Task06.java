@@ -2,6 +2,7 @@ package ua.step.practice;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -10,25 +11,43 @@ import java.util.Random;
  * (встречающихся в массиве один раз). Вывести на консоль
  * значения уникальных элементов и индексы, под которыми
  * они находятся в массиве.
- *
- *  Пример:
- *      -5 -> 0 индекс
- *      3 -> 1 индекс
- *      4 -> 2 индекс
- *      2 -> 3 индекс
- *      0 -> 4 индекс
- *      -2 -> 5 индекс
- *      -4 -> 6 индекс
- *      -1 -> 9 индекс
+ * <p>
+ * Пример:
+ * -5 -> 0 индекс
+ * 3 -> 1 индекс
+ * 4 -> 2 индекс
+ * 2 -> 3 индекс
+ * 0 -> 4 индекс
+ * -2 -> 5 индекс
+ * -4 -> 6 индекс
+ * -1 -> 9 индекс
  */
 public class Task06 {
 
     public static void main(String[] args) {
         // TODO: не менять стоки ниже - нобходимо для тестирования @see ua.step.homework01.TaskTest06
         long seed = args.length > 0 ? Long.parseLong(args[0]) : LocalDateTime.now().toEpochSecond(ZoneOffset.UTC);
-
         // Использовать для генерирования элементов массива
         Random rnd = new Random(seed);
+        int mas[] = new int[10];
+        Arrays.setAll(mas, i -> rnd.nextInt((6 + 5)) - 5);
+
+
+        var isUnique = true;
+        for (int i = 0; i < mas.length; i++) {
+            for (int j = 0; j < mas.length; j++) {
+                if (j == i)
+                    continue;
+                if (mas[i] == mas[j]) {
+                    isUnique = false;
+                    break;
+                }
+            }
+            if (isUnique) {
+                System.out.printf("%d -> %d индекс\n", mas[i], i);
+            }
+            isUnique = true;
+        }
 
         // TODO: Пишите код здесь
     }

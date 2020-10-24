@@ -2,6 +2,7 @@ package ua.step.practice;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -24,14 +25,27 @@ public class Task08 {
         // TODO: не менять стоки ниже - нобходимо для тестирования @see ua.step.homework01.TaskTest08
         long seed = args.length > 0 ? Long.parseLong(args[0]) : LocalDateTime.now().toEpochSecond(ZoneOffset.UTC);
 
-        // Использовать для генерирования элементов массива
         Random rnd = new Random(seed);
-
         Scanner scanner = new Scanner(System.in);
         System.out.print("Введите размер массива: ");
-        int len = scanner.nextInt();
 
-        char[] arr;
+        int len = scanner.nextInt();
+        int[] arr = new int[len];
+
+        Arrays.setAll(arr, i -> (char) rnd.nextInt('z' - 'a' + 1) + 'a');
+
+        int[] counter = new int[Arrays.stream(arr).max().getAsInt() + 1];
+
+        for (int i = 0; i < arr.length; i++) {
+            counter[arr[i]]++;
+        }
+
+        for (int i = 0; i < counter.length; i++) {
+            if (counter[i] < 4)
+                continue;
+            System.out.printf(counter[i] > 1 && counter[i] < 5 ? "%c - %d раза\n" : "%c - %d раз\n", (char) i, counter[i]);
+        }
+
         // TODO: Пишите код здесь
     }
 }

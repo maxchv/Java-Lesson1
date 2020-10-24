@@ -2,7 +2,9 @@ package ua.step.practice;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.util.Arrays;
 import java.util.Random;
+import java.util.stream.IntStream;
 
 /**
  * Задание: Заполнить массив на 30 элементов случайными числами
@@ -17,10 +19,9 @@ public class Task02 {
         // Использовать для генерирования элементов массива
         Random rnd = new Random(seed);
 
-        // TODO: Пишите код здесь
-        for (int i = 0; i < 30; i++) {
-            System.out.print(rnd.nextInt(51+70) - 70); // 0..120 - 70 = -70..+50
-            System.out.print(" ");
-        }
+        int mas[] = new int[30];
+        Arrays.setAll(mas, i -> rnd.nextInt(51+70) - 70);
+
+        System.out.printf("%d %d", Arrays.stream(mas).min().getAsInt(), Arrays.stream(mas).max().getAsInt());
     }
 }

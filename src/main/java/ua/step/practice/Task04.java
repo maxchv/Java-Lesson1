@@ -1,6 +1,7 @@
 package ua.step.practice;
 
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Задание: написать программу, которая проверяет, все ли значения
@@ -15,8 +16,13 @@ public class Task04 {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Введите размер массива: ");
         int len = scanner.nextInt();
-
         // TODO: Пишите код здесь
+        int[] arr = new int[len];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = scanner.nextInt();
+        }
+
+        System.out.println(Arrays.stream(arr).boxed().collect(Collectors.toSet()).stream().count() == arr.length ? "Yes" : "No");
 
     }
 }

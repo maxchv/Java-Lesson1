@@ -2,7 +2,9 @@ package ua.step.practice;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.util.Arrays;
 import java.util.Random;
+
 
 /**
  * Задание: Заполнить массив на 10 элементов случайными числами
@@ -17,12 +19,28 @@ import java.util.Random;
  */
 public class Task05 {
     public static void main(String[] args) {
-        // TODO: не менять стоки ниже - нобходимо для тестирования @see ua.step.homework01.TaskTest05
+        
         long seed = args.length > 0 ? Long.parseLong(args[0]) : LocalDateTime.now().toEpochSecond(ZoneOffset.UTC);
-
-        // Использовать для генерирования элементов массива
         Random rnd = new Random(seed);
 
-        // TODO: Пишите код здесь
+        int mas[] = new int[10];
+        Arrays.setAll(mas, i -> rnd.nextInt((6 + 5)) - 5);
+        var res = Arrays.stream(mas).sorted().toArray();
+
+        int count = 1;
+        for (int i = 8; i >= 0; i--) {
+            if (res[i] == res[i + 1]) {
+                ++count;
+            } else {
+                if (count > 1) {
+                    System.out.printf(count > 1 && count < 5 ? "%d - %d раза\n" : "%d - %d раз\n", res[i + 1], count);
+                }
+                count = 1;
+            }
+
+        }
+        if (count > 1) {
+            System.out.printf(count > 1 && count < 5 ? "%d - %d раза\n" : "%d - %d раз\n", res[0], count);
+        }
     }
 }

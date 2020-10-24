@@ -2,6 +2,7 @@ package ua.step.practice;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -13,8 +14,8 @@ import java.util.Scanner;
  * исходный и результирующий массив на консоль.
  * <p>
  * Пример вывода:
- *      Исходный массив [9, 10, -2, 4, 0, 5, 1, 8, -1, 3]
- *      Результат [9, 10, 4, 4, 0, 5, 1, 8, 1, 3]
+ * Исходный массив [9, 10, -2, 4, 0, 5, 1, 8, -1, 3]
+ * Результат [9, 10, 4, 4, 0, 5, 1, 8, 1, 3]
  */
 public class Task09 {
     public static void main(String[] args) {
@@ -28,9 +29,16 @@ public class Task09 {
         System.out.print("Введите размер массива: ");
         int len = scanner.nextInt();
 
-        int[] arr;
-        // TODO: Пишите код здесь
+        int[] arr = new int[len];
+        Arrays.setAll(arr, i ->  rnd.nextInt(len + 3) - 2);
 
+        System.out.printf("Исходный массив %s\n", Arrays.toString(arr));
+
+        if (!Arrays.stream(arr).anyMatch(i -> i < -1))
+            return;
+
+        Arrays.setAll(arr, i -> arr[i] < 0 ? arr[i] * arr[i] : arr[i]);
+        System.out.printf("Результат %s\n", Arrays.toString(arr));
 
     }
 }
