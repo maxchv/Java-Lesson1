@@ -22,7 +22,8 @@ public class Task04 {
             arr[i] = scanner.nextInt();
         }
 
-        System.out.println(Arrays.stream(arr).boxed().collect(Collectors.toSet()).stream().count() == arr.length ? "Yes" : "No");
+        // То же, что и Task03
+        System.out.println(Arrays.stream(arr).distinct().count() == arr.length ? "Yes" : "No");
 
     }
 }

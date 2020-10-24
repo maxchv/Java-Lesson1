@@ -22,7 +22,8 @@ public class Task03 {
         for (int i = 0; i < arr.length; i++) {
             arr[i] = scanner.nextInt();
         }
-        System.out.println(Arrays.stream(arr).filter(el -> el == arr[0]).count() != arr.length ? "No" : "Yes" );
+        // Через distinct() будет лучше
+        System.out.println(Arrays.stream(arr).distinct().count() != 1 ? "No" : "Yes" );
 
     }
 }

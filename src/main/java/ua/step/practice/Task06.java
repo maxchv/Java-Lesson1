@@ -29,7 +29,7 @@ public class Task06 {
         long seed = args.length > 0 ? Long.parseLong(args[0]) : LocalDateTime.now().toEpochSecond(ZoneOffset.UTC);
         // Использовать для генерирования элементов массива
         Random rnd = new Random(seed);
-        int mas[] = new int[10];
+        int[] mas = new int[10];
         Arrays.setAll(mas, i -> rnd.nextInt((6 + 5)) - 5);
 
 

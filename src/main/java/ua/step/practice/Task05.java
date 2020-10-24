@@ -3,6 +3,7 @@ package ua.step.practice;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Random;
 
 
@@ -19,28 +20,17 @@ import java.util.Random;
  */
 public class Task05 {
     public static void main(String[] args) {
-        
+
         long seed = args.length > 0 ? Long.parseLong(args[0]) : LocalDateTime.now().toEpochSecond(ZoneOffset.UTC);
         Random rnd = new Random(seed);
 
-        int mas[] = new int[10];
+        int[] mas = new int[10];
         Arrays.setAll(mas, i -> rnd.nextInt((6 + 5)) - 5);
-        var res = Arrays.stream(mas).sorted().toArray();
-
-        int count = 1;
-        for (int i = 8; i >= 0; i--) {
-            if (res[i] == res[i + 1]) {
-                ++count;
-            } else {
-                if (count > 1) {
-                    System.out.printf(count > 1 && count < 5 ? "%d - %d раза\n" : "%d - %d раз\n", res[i + 1], count);
-                }
-                count = 1;
-            }
-
-        }
-        if (count > 1) {
-            System.out.printf(count > 1 && count < 5 ? "%d - %d раза\n" : "%d - %d раз\n", res[0], count);
-        }
+        Arrays.stream(mas).collect(
+                HashMap<Integer, Integer>::new,
+                (hm, num) -> hm.put(num, hm.getOrDefault(num, 0) + 1), HashMap<Integer, Integer>::putAll)
+                .forEach((num, count) -> {
+                    if (count > 1) System.out.printf(count < 5 ? "%d - %d раза\n" : "%d - %d раз\n", num, count);
+                });
     }
 }

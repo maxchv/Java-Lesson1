@@ -19,7 +19,7 @@ public class Task02 {
         // Использовать для генерирования элементов массива
         Random rnd = new Random(seed);
 
-        int mas[] = new int[30];
+        int[] mas = new int[30]; // C стиль объявления массива допустим, но не желателен
         Arrays.setAll(mas, i -> rnd.nextInt(51+70) - 70);
 
         System.out.printf("%d %d", Arrays.stream(mas).min().getAsInt(), Arrays.stream(mas).max().getAsInt());
